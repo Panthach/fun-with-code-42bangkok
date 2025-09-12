@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+
+#calcForm {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+
+#calcForm input[type="number"],
+#calcForm select {
+  font-size: 1.2em;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+
+#calcForm input[type="number"]:focus,
+#calcForm select:focus {
+  border-color: #007bff;
+}
+
+
+#calcForm input[type="submit"] {
+  font-size: 1.2em;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+#calcForm input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
+#calcForm input[type="number"],
+#calcForm select,
+#calcForm input[type="submit"] {
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <form id="calcForm">
+    <input type="number" id="left" min="0" placeholder="Left Number" required>
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    <input type="number" id="right" min="0" placeholder="Right Number" required>
+    <input type="submit" value="Try me!">
+  </form>
+
+  <script>
+    const form = document.getElementById('calcForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const left = parseInt(document.getElementById('left').value);
+      const operator = document.getElementById('operator').value;
+      const right = parseInt(document.getElementById('right').value);
+
+      if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+        alert('Error :(');
+        console.log('Error :(');
+        return;
+      }
+
+      let result;
+      if (operator === '/' && right === 0 || operator === '%' && right === 0) {
+        alert("It's over 9000!");
+        console.log("It's over 9000!");
+        return;
+      } else {
+        switch (operator) {
+          case '+':
+            result = left + right;
+            break;
+          case '-':
+            result = left - right;
+            break;
+          case '*':
+            result = left * right;
+            break;
+          case '/':
+            result = left / right;
+            break;
+          case '%':
+            result = left % right;
+            break;
+        }
+        alert('Result: ' + result);
+        console.log('Result: ' + result);
+      }
+    });
+
+    setInterval(() => {
+      alert('Please, use me...');
+    }, 30000);
+  </script>
+</body>
+</html>
